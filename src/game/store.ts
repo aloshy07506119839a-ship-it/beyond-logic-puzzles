@@ -107,7 +107,7 @@ export function hasProgress(s: GameState) {
   return Object.keys(s.results).length > 0 && !s.finished;
 }
 
-export function useHint(id: number) {
+export function takeHint(id: number) {
   const s = getState();
   if (s.hintUsed[id]) return;
   sfx("hint");
