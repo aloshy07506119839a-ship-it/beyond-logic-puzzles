@@ -38,6 +38,7 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
+
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
@@ -73,6 +74,35 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   );
 }
 
+function RootShell({ children }: { children: ReactNode }) {
+  return (
+    <html lang="ar">
+      <head>
+        <HeadContent />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4054542752545477"
+          crossOrigin="anonymous"
+        ></script>
+      </head>
+      <body>
+        {children}
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
+function RootComponent() {
+  const { queryClient } = Route.useRouteContext();
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Outlet />
+    </QueryClientProvider>
+  );
+}
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
@@ -101,47 +131,3 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-```tsx
-function RootShell({ children }: { children: ReactNode }) {
-  return (
-    <html lang="ar">
-      <head>
-        <HeadContent />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4054542752545477"
-          crossOrigin="anonymous"
-        ></script>
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
-```
-  return (
-    <html lang="en">
-      <head>
-        <
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
-
-function RootComponent() {
-  const { queryClient } = Route.useRouteContext();
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
-    </QueryClientProvider>
-  );
-}
