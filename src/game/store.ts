@@ -81,7 +81,6 @@ export function useGame() {
     (l) => {
       load();
       listeners.add(l);
-      l();
       return () => listeners.delete(l);
     },
     () => {
@@ -171,7 +170,7 @@ function checkAchievements(s: GameState): GameState {
     const ps = PUZZLES.filter((p) => p.stage === st);
     if (ps.every((p) => s.results[p.id])) {
       add(`stage${st}`);
-      if (ps.every((p) => !s.results[p.id].hint)) add("nohint");
+      if (ps.every((p) => !s.results[p.id]!.hint)) add("nohint");
     }
   }
   if (solved === PUZZLES.length && Object.values(s.results).every((r) => !r.hint && !r.wrong)) add("perfect");
