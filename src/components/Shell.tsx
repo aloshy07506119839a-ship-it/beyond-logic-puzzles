@@ -14,7 +14,7 @@ export function Shell({ children, title }: { children: ReactNode; title?: string
           <Link to="/settings" className="rounded-full px-3 py-2 text-muted-foreground hover:bg-secondary hover:text-foreground" aria-label="الإعدادات">⚙️</Link>
         </nav>
       </header>
-      {title && <h1 className="mb-6 text-3xl text-gradient">{title}</h1>}
+      {title && <h1 className="mb-6 py-1 text-3xl leading-normal text-gradient">{title}</h1>}
       <main className="flex flex-1 flex-col">{children}</main>
     </div>
   );
