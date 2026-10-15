@@ -19,8 +19,8 @@ export const Route = createFileRoute("/play")({
 function Play() {
   const s = useGame();
   const nav = useNavigate();
-  const puzzle = PUZZLES[s.current];
-  const stage = STAGES[puzzle.stage - 1];
+  const puzzle = PUZZLES[Math.min(s.current, PUZZLES.length - 1)]!;
+  const stage = STAGES[puzzle.stage - 1]!;
   const solved = !!s.results[puzzle.id];
   const [wrongPick, setWrongPick] = useState<number[]>([]);
   const [shakeKey, setShakeKey] = useState(0);
@@ -117,11 +117,11 @@ function Play() {
         {solved ? (
           <div className="mt-5 animate-rise">
             <div className="rounded-2xl bg-success/15 p-4 text-sm">
-              <div className="mb-1 font-bold text-success">أحسنت! +{s.results[puzzle.id].points} نقطة</div>
+              <div className="mb-1 font-bold text-success">أحسنت! +{s.results[puzzle.id]!.points} نقطة</div>
               {puzzle.explanation}
             </div>
             <button onClick={next} className={`${btn.primary} mt-4 w-full`}>
-              {s.current + 1 >= PUZZLES.length ? "عرض النتائج" : PUZZLES[s.current + 1].stage !== puzzle.stage ? "المرحلة التالية ←" : "اللغز التالي ←"}
+              {s.current + 1 >= PUZZLES.length ? "عرض النتائج" : PUZZLES[s.current + 1]!.stage !== puzzle.stage ? "المرحلة التالية ←" : "اللغز التالي ←"}
             </button>
           </div>
         ) : (
