@@ -106,7 +106,8 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <HeadContent />
+        <HeadCon<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4054542752545477"
+     crossorigin="anonymous"></script>tent />
       </head>
       <body>
         {children}
