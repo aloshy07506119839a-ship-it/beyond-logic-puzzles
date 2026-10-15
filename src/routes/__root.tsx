@@ -102,7 +102,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+```tsx
 function RootShell({ children }: { children: ReactNode }) {
+  return (
+    <html lang="ar">
+      <head>
+        <HeadContent />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4054542752545477"
+          crossOrigin="anonymous"
+        ></script>
+      </head>
+      <body>
+        {children}
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+```
   return (
     <html lang="en">
       <head>
